@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MVP_Github</string>
+    <string name="error_null_search_result_or_total_count">Search results or total count are null</string>
+    <string name="error_null_response_or_unsuccessful">Search results or total count are null</string>
+    <string name="repo_full_name">repo full name</string>
+    <string name="search_hint">Enter keyword e.g. android</string>
+    <string name="enter_search_word">Enter search word</string>
+    <string name="results_count">Number of results: %d</string>
+    <string name="undefined_error">Undefined error</string>
 </resources>
