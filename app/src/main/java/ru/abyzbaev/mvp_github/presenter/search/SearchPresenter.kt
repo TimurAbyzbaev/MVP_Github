@@ -1,14 +1,17 @@
-package ru.abyzbaev.mvp_github.presenter
+package ru.abyzbaev.mvp_github.presenter.search
 
 import retrofit2.Response
 import ru.abyzbaev.mvp_github.model.SearchResponse
+import ru.abyzbaev.mvp_github.presenter.PresenterContract
 import ru.abyzbaev.mvp_github.repository.GitHubRepository
+import ru.abyzbaev.mvp_github.repository.GitHubRepository.*
 import ru.abyzbaev.mvp_github.view.ViewContract
+import ru.abyzbaev.mvp_github.view.search.ViewSearchContract
 
 internal class SearchPresenter internal constructor(
-    private val viewContract: ViewContract,
+    private val viewContract: ViewSearchContract,
     private val repository: GitHubRepository
-) : PresenterContract, GitHubRepository.GitHubRepositoryCallback {
+) : PresenterSearchContract, GitHubRepositoryCallback {
 
     override fun searchGitHub(searchQuery: String) {
         viewContract.displayLoading(true)

@@ -1,4 +1,4 @@
-package ru.abyzbaev.mvp_github.view
+package ru.abyzbaev.mvp_github.view.search
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,15 +11,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.abyzbaev.mvp_github.R
 import ru.abyzbaev.mvp_github.databinding.ActivityMainBinding
 import ru.abyzbaev.mvp_github.model.SearchResult
-import ru.abyzbaev.mvp_github.presenter.SearchPresenter
+import ru.abyzbaev.mvp_github.presenter.search.SearchPresenter
 import ru.abyzbaev.mvp_github.repository.GitHubApi
 import ru.abyzbaev.mvp_github.repository.GitHubRepository
+import ru.abyzbaev.mvp_github.view.ViewContract
+import ru.abyzbaev.mvp_github.view.details.DetailsActivity
 import java.util.*
 
-class MainActivity : AppCompatActivity(), ViewContract {
+class MainActivity : AppCompatActivity(), ViewSearchContract {
 
     private val adapter = SearchResultAdapter()
     private val presenter = SearchPresenter(this, createRepository())
+    private var totalCount: Int = 0
+
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +45,9 @@ class MainActivity : AppCompatActivity(), ViewContract {
     }
 
     private fun setUI() {
+        binding.toDetailsActivityButton.setOnClickListener {
+            startActivity(DetailsActivity.getIntent(this, totalCount))
+        }
         setQueryListener()
         setRecyclerView()
     }
@@ -72,8 +79,8 @@ class MainActivity : AppCompatActivity(), ViewContract {
 
     override fun displaySearchResults(searchResults: List<SearchResult>, totalCount: Int) {
         adapter.updateResults(searchResults)
-        binding.resultsCountTextView.text =
-            String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
+        this.totalCount = totalCount
+        adapter.updateResults(searchResults)
     }
 
     override fun displayError() {
