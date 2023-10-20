@@ -12,13 +12,23 @@ import java.util.*
 
 class DetailsActivity : AppCompatActivity(), ViewDetailsContract {
     private lateinit var binding : ActivityDetailsBinding
-    private val presenter: PresenterDetailsContract = DetailsPresenter(this)
+    internal val presenter: PresenterDetailsContract = DetailsPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onAttach()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.onDetach()
     }
 
     private fun setUI() {

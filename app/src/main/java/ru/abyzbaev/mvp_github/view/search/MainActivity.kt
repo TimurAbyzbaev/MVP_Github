@@ -33,6 +33,16 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         setUI()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.onAttach()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.onDetach()
+    }
+
     private fun createRepository(): GitHubRepository {
         return GitHubRepository(createRetrofit().create(GitHubApi::class.java))
     }
