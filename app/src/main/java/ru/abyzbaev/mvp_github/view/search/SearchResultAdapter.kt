@@ -1,4 +1,4 @@
-package ru.abyzbaev.mvp_github.view
+package ru.abyzbaev.mvp_github.view.search
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.abyzbaev.mvp_github.R
 import ru.abyzbaev.mvp_github.model.SearchResult
-import ru.abyzbaev.mvp_github.view.SearchResultAdapter.SearchResultViewHolder
+import ru.abyzbaev.mvp_github.view.search.SearchResultAdapter.SearchResultViewHolder
 
 internal class SearchResultAdapter : RecyclerView.Adapter<SearchResultViewHolder>() {
     private var results: List<SearchResult> = listOf()

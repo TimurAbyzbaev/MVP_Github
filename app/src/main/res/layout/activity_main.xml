@@ -27,13 +27,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/resultsCountTextView"
+    <Button
+        android:id="@+id/toDetailsActivityButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin"
+        android:layout_margin="@dimen/margin"
         app:layout_constraintTop_toBottomOf="@id/searchEditText"
-        tools:text="Number of results: 1000000" />
+        android:text="@string/to_details" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -41,5 +41,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/resultsCountTextView" />
+        app:layout_constraintTop_toBottomOf="@id/toDetailsActivityButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

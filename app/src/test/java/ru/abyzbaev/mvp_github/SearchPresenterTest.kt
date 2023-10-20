@@ -9,9 +9,10 @@ import org.mockito.MockitoAnnotations
 import retrofit2.Response
 import ru.abyzbaev.mvp_github.model.SearchResponse
 import ru.abyzbaev.mvp_github.model.SearchResult
-import ru.abyzbaev.mvp_github.presenter.SearchPresenter
+import ru.abyzbaev.mvp_github.presenter.search.SearchPresenter
 import ru.abyzbaev.mvp_github.repository.GitHubRepository
 import ru.abyzbaev.mvp_github.view.ViewContract
+import ru.abyzbaev.mvp_github.view.search.ViewSearchContract
 
 class SearchPresenterTest {
     private lateinit var presenter: SearchPresenter
@@ -20,7 +21,7 @@ class SearchPresenterTest {
     private lateinit var repository: GitHubRepository
 
     @Mock
-    private lateinit var viewContract: ViewContract
+    private lateinit var viewContract: ViewSearchContract
 
     @Before
     fun setUp() {
