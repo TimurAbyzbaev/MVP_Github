@@ -1,20 +1,22 @@
 package ru.abyzbaev.mvp_github.view.search
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
+import ru.abyzbaev.mvp_github.BuildConfig
 import ru.abyzbaev.mvp_github.R
 import ru.abyzbaev.mvp_github.databinding.ActivityMainBinding
 import ru.abyzbaev.mvp_github.model.SearchResult
+import ru.abyzbaev.mvp_github.presenter.RepositoryContract
 import ru.abyzbaev.mvp_github.presenter.search.SearchPresenter
 import ru.abyzbaev.mvp_github.repository.GitHubApi
 import ru.abyzbaev.mvp_github.repository.GitHubRepository
-import ru.abyzbaev.mvp_github.view.ViewContract
 import ru.abyzbaev.mvp_github.view.details.DetailsActivity
 import java.util.*
 
@@ -43,8 +45,13 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         presenter.onDetach()
     }
 
-    private fun createRepository(): GitHubRepository {
+    private fun createRepository(): RepositoryContract {
         return GitHubRepository(createRetrofit().create(GitHubApi::class.java))
+//        if(BuildConfig.TYPE == FAKE) {
+//            FakeGithubRepository()
+//        } else {
+//            GitHubRepository(createRetrofit().create(GitHubApi::class.java))
+//        }
     }
 
     private fun createRetrofit(): Retrofit {
@@ -88,7 +95,11 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     override fun displaySearchResults(searchResults: List<SearchResult>, totalCount: Int) {
-        adapter.updateResults(searchResults)
+        with(binding.totalCountTextView) {
+            visibility = View.VISIBLE
+            text = String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
+        }
+
         this.totalCount = totalCount
         adapter.updateResults(searchResults)
     }

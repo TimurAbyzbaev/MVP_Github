@@ -11,8 +11,6 @@ import ru.abyzbaev.mvp_github.model.SearchResponse
 import ru.abyzbaev.mvp_github.model.SearchResult
 import ru.abyzbaev.mvp_github.presenter.search.SearchPresenter
 import ru.abyzbaev.mvp_github.repository.GitHubRepository
-import ru.abyzbaev.mvp_github.view.ViewContract
-import ru.abyzbaev.mvp_github.view.search.ViewSearchContract
 
 class SearchPresenterTest {
     private lateinit var presenter: SearchPresenter

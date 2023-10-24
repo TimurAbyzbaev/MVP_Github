@@ -1,6 +1,5 @@
 package ru.abyzbaev.mvp_github
 
-import com.nhaarman.mockito_kotlin.mock
 import okhttp3.Request
 import okio.Timeout
 import org.junit.Before
@@ -12,7 +11,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.abyzbaev.mvp_github.model.SearchResponse
-import ru.abyzbaev.mvp_github.repository.GitHubApi
 import ru.abyzbaev.mvp_github.repository.GitHubRepository
 import ru.abyzbaev.mvp_github.repository.GitHubRepository.*
 
