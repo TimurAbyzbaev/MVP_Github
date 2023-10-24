@@ -1,6 +1,5 @@
 package ru.abyzbaev.mvp_github.presenter.details
 
-import ru.abyzbaev.mvp_github.view.ViewContract
 import ru.abyzbaev.mvp_github.view.details.ViewDetailsContract
 
 internal class DetailsPresenter internal constructor(

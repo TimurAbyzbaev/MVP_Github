@@ -2,16 +2,14 @@ package ru.abyzbaev.mvp_github.presenter.search
 
 import retrofit2.Response
 import ru.abyzbaev.mvp_github.model.SearchResponse
-import ru.abyzbaev.mvp_github.presenter.PresenterContract
-import ru.abyzbaev.mvp_github.repository.GitHubRepository
-import ru.abyzbaev.mvp_github.repository.GitHubRepository.*
-import ru.abyzbaev.mvp_github.view.ViewContract
+import ru.abyzbaev.mvp_github.presenter.RepositoryContract
+import ru.abyzbaev.mvp_github.repository.RepositoryCallback
 import ru.abyzbaev.mvp_github.view.search.ViewSearchContract
 
 internal class SearchPresenter internal constructor(
     private val viewContract: ViewSearchContract,
-    private val repository: GitHubRepository
-) : PresenterSearchContract, GitHubRepositoryCallback {
+    private val repository: RepositoryContract
+) : PresenterSearchContract, RepositoryCallback {
 
     private var isAttached = false
     override fun searchGitHub(searchQuery: String) {
@@ -29,7 +27,7 @@ internal class SearchPresenter internal constructor(
         isAttached = false
     }
 
-    override fun handleGitHubResponse(response: Response<SearchResponse?>?) {
+    override fun handleGithubResponse(response: Response<SearchResponse?>?) {
         if(isAttached) {
             viewContract.displayLoading(false)
             if (response != null && response.isSuccessful) {
@@ -48,7 +46,7 @@ internal class SearchPresenter internal constructor(
 
     }
 
-    override fun handleGitHubError() {
+    override fun handleGithubError() {
         viewContract.displayLoading(false)
         viewContract.displayError()
     }
