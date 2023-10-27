@@ -47,11 +47,6 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
 
     private fun createRepository(): RepositoryContract {
         return GitHubRepository(createRetrofit().create(GitHubApi::class.java))
-//        if(BuildConfig.TYPE == FAKE) {
-//            FakeGithubRepository()
-//        } else {
-//            GitHubRepository(createRetrofit().create(GitHubApi::class.java))
-//        }
     }
 
     private fun createRetrofit(): Retrofit {
@@ -65,6 +60,9 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         binding.toDetailsActivityButton.setOnClickListener {
             startActivity(DetailsActivity.getIntent(this, totalCount))
         }
+        binding.searchButton.setOnClickListener {
+            searchTask()
+        }
         setQueryListener()
         setRecyclerView()
     }
@@ -73,29 +71,32 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter
     }
+    private fun searchTask() : Boolean {
+        val query = binding.searchEditText.text.toString()
+        return if (query.isNotBlank()) {
+            presenter.searchGitHub(query)
+            true
+        } else {
+            Toast.makeText(
+                this,
+                getString(R.string.enter_search_word),
+                Toast.LENGTH_SHORT
+            ).show()
+            false
+        }
+    }
 
     private fun setQueryListener() {
         binding.searchEditText.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val query = binding.searchEditText.text.toString()
-                if (query.isNotBlank()) {
-                    presenter.searchGitHub(query)
-                    return@OnEditorActionListener true
-                } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        getString(R.string.enter_search_word),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@OnEditorActionListener false
-                }
+                searchTask()
             }
             false
         })
     }
 
     override fun displaySearchResults(searchResults: List<SearchResult>, totalCount: Int) {
-        with(binding.totalCountTextView) {
+        with(binding.totalCountTextViewMainActivity) {
             visibility = View.VISIBLE
             text = String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
         }

@@ -1,7 +1,6 @@
-package ru.abyzbaev.mvp_github
+package ru.abyzbaev.mvp_github.espresso
 
 import android.widget.TextView
-import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewAssertion
@@ -16,7 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import ru.abyzbaev.mvp_github.view.details.DetailsActivity
 
-import org.junit.Assert.assertEquals
+import ru.abyzbaev.mvp_github.R
 
 @RunWith(AndroidJUnit4::class)
 class DetailsActivityEspressoTest {
