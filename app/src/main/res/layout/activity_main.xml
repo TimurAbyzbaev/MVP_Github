@@ -28,15 +28,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/search"
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
+
+    <Button
         android:id="@+id/toDetailsActivityButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
-        app:layout_constraintTop_toBottomOf="@id/searchEditText"
-        android:text="@string/to_details" />
+        android:text="@string/to_details"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/totalCountTextView"
+        android:id="@+id/totalCountTextViewMainActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"

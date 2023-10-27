@@ -1,12 +1,10 @@
-package ru.abyzbaev.mvp_github
+package ru.abyzbaev.mvp_github.espresso
 
 import android.view.View
-import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -17,6 +15,8 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import ru.abyzbaev.mvp_github.BuildConfig
+import ru.abyzbaev.mvp_github.R
 import ru.abyzbaev.mvp_github.view.search.MainActivity
 
 @RunWith(AndroidJUnit4::class)
