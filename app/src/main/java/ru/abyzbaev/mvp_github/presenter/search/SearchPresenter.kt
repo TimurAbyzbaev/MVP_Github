@@ -3,6 +3,7 @@ package ru.abyzbaev.mvp_github.presenter.search
 import retrofit2.Response
 import ru.abyzbaev.mvp_github.model.SearchResponse
 import ru.abyzbaev.mvp_github.presenter.RepositoryContract
+import ru.abyzbaev.mvp_github.repository.GitHubRepository
 import ru.abyzbaev.mvp_github.repository.RepositoryCallback
 import ru.abyzbaev.mvp_github.view.search.ViewSearchContract
 
@@ -12,7 +13,8 @@ internal class SearchPresenter internal constructor(
 ) : PresenterSearchContract, RepositoryCallback {
 
     private var isAttached = false
-    override fun searchGitHub(searchQuery: String) {
+
+    override fun searchGithub(searchQuery: String) {
         if(isAttached) {
             viewContract.displayLoading(true)
             repository.searchGithub(searchQuery, this)

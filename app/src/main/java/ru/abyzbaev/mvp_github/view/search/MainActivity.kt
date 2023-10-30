@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     private fun searchTask() : Boolean {
         val query = binding.searchEditText.text.toString()
         return if (query.isNotBlank()) {
-            presenter.searchGitHub(query)
+            presenter.searchGithub(query)
             true
         } else {
             Toast.makeText(
