@@ -17,6 +17,10 @@ import ru.abyzbaev.mvp_github.view.details.DetailsActivity
 
 import ru.abyzbaev.mvp_github.R
 
+internal const val TEST_NUMBER_OF_RESULTS_ZERO = "Number of results: 0"
+internal const val TEST_NUMBER_OF_RESULTS_PLUS_1 = "Number of results: 1"
+internal const val TEST_NUMBER_OF_RESULTS_MINUS_1 = "Number of results: -1"
+
 @RunWith(AndroidJUnit4::class)
 class DetailsActivityEspressoTest {
     private lateinit var scenario: ActivityScenario<DetailsActivity>
@@ -58,7 +62,7 @@ class DetailsActivityEspressoTest {
 
     @Test
     fun activityTextView_HasText() {
-        val assertion: ViewAssertion = matches(withText("Number of results: 0"))
+        val assertion: ViewAssertion = matches(withText(TEST_NUMBER_OF_RESULTS_ZERO))
         onView(withId(R.id.totalCountTextView)).check(assertion)
     }
 
@@ -80,11 +84,11 @@ class DetailsActivityEspressoTest {
     @Test
     fun activityButtonIncrement_IsWorking() {
         onView(withId(R.id.incrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 1")))
+        onView(withId(R.id.totalCountTextView)).check(matches(withText(TEST_NUMBER_OF_RESULTS_ZERO)))
     }
     @Test
     fun activityButtonDecrement_IsWorking() {
         onView(withId(R.id.decrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: -1")))
+        onView(withId(R.id.totalCountTextView)).check(matches(withText(TEST_NUMBER_OF_RESULTS_MINUS_1)))
     }
 }

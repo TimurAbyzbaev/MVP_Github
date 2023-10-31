@@ -11,6 +11,7 @@ import ru.abyzbaev.mvp_github.model.SearchResponse
 import ru.abyzbaev.mvp_github.model.SearchResult
 import ru.abyzbaev.mvp_github.presenter.search.SearchPresenter
 import ru.abyzbaev.mvp_github.repository.GitHubRepository
+import ru.abyzbaev.mvp_github.view.search.ViewSearchContract
 
 class SearchPresenterTest {
     private lateinit var presenter: SearchPresenter
@@ -29,14 +30,14 @@ class SearchPresenterTest {
 
     @Test //Проверка вызова метода searchGitHub() у нашего Репозитория
     fun searchGitHub_Test() {
-        val searchQuery = "some query"
-        presenter.searchGitHub("some query")
-        verify(repository, times(1)).searchGithub(searchQuery, presenter)
+        presenter.onAttach()
+        presenter.searchGithub(TEST_QUERY)
+        verify(repository, times(1)).searchGithub(TEST_QUERY, presenter)
     }
 
     @Test // Проверка работы метода handleGitHubError()
     fun handleGitHubError_Test() {
-        presenter.handleGitHubError()
+        presenter.handleGithubError()
         verify(viewContract, times(1)).displayError()
     }
 
@@ -51,7 +52,8 @@ class SearchPresenterTest {
     fun handleGitHubResponse_Failure() {
         val response = mock(Response::class.java) as Response<SearchResponse?>
         `when`(response.isSuccessful).thenReturn(false)
-        presenter.handleGitHubResponse(response)
+        presenter.onAttach()
+        presenter.handleGithubResponse(response)
         verify(viewContract, times(1))
             .displayError("Response is null or unsuccessful")
     }
@@ -60,7 +62,9 @@ class SearchPresenterTest {
     fun handleGitHubResponse_Failure_ViewContractMethodOrder() {
         val response = mock(Response::class.java) as Response<SearchResponse?>
         `when`(response.isSuccessful).thenReturn(false)
-        presenter.handleGitHubResponse(response)
+
+        presenter.onAttach()
+        presenter.handleGithubResponse(response)
 
         val inOrder = inOrder(viewContract)
         inOrder.verify(viewContract).displayLoading(false)
@@ -71,7 +75,7 @@ class SearchPresenterTest {
     fun handleGitHubResponse_ResponseIsEmpty() {
         val response = mock(Response::class.java) as Response<SearchResponse?>
         `when`(response.body()).thenReturn(null)
-        presenter.handleGitHubResponse(response)
+        presenter.handleGithubResponse(response)
         assertNull(response.body())
     }
 
@@ -79,7 +83,7 @@ class SearchPresenterTest {
     fun handleGitHubResponse_ResponseIsNotEmpty() {
         val response = mock(Response::class.java) as Response<SearchResponse?>
         `when`(response.body()).thenReturn(mock(SearchResponse::class.java))
-        presenter.handleGitHubResponse(response)
+        presenter.handleGithubResponse(response)
         assertNotNull(response.body())
     }
 
@@ -89,7 +93,8 @@ class SearchPresenterTest {
         `when`(response.isSuccessful).thenReturn(true)
         `when`(response.body()).thenReturn(null)
 
-        presenter.handleGitHubResponse(response)
+        presenter.onAttach()
+        presenter.handleGithubResponse(response)
         verify(viewContract, times(1))
             .displayError("Search results or total count are null")
     }
@@ -102,11 +107,11 @@ class SearchPresenterTest {
         `when`(response.isSuccessful).thenReturn(true)
         `when`(response.body()).thenReturn(searchResponse)
         `when`(searchResponse.searchResults).thenReturn(searchResults)
-        `when`(searchResponse.totalCount).thenReturn(505)
+        `when`(searchResponse.totalCount).thenReturn(TEST_NUMBER)
 
-        presenter.handleGitHubResponse(response)
+        presenter.onAttach()
+        presenter.handleGithubResponse(response)
         verify(viewContract, times(1))
-            .displaySearchResults(searchResults,505)
+            .displaySearchResults(searchResults,TEST_NUMBER)
     }
-
 }

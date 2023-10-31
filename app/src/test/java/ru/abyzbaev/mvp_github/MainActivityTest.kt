@@ -78,9 +78,9 @@ class MainActivityTest {
     fun activityTextEditSetText_Test() {
         scenario.onActivity {
             val editText: EditText = it.findViewById(R.id.searchEditText)
-            editText.setText("android", TextView.BufferType.EDITABLE)
+            editText.setText(TEST_QUERY, TextView.BufferType.EDITABLE)
             assertNotNull(editText.text)
-            assertEquals("android", editText.text.toString())
+            assertEquals(TEST_QUERY, editText.text.toString())
         }
     }
 
@@ -88,13 +88,13 @@ class MainActivityTest {
     fun activityTextEdit_Search() {
         scenario.onActivity {
             val editText: EditText = it.findViewById(R.id.searchEditText)
-            editText.setText("android", TextView.BufferType.EDITABLE)
+            editText.setText(TEST_QUERY, TextView.BufferType.EDITABLE)
             editText.onEditorAction(EditorInfo.IME_ACTION_SEARCH)
             Toast.makeText(
                 ApplicationProvider.getApplicationContext(),
                 editText.text.toString(),
                 Toast.LENGTH_SHORT).show()
-            assertEquals("android", ShadowToast.getTextOfLatestToast())
+            assertEquals(TEST_QUERY, ShadowToast.getTextOfLatestToast())
         }
     }
 
