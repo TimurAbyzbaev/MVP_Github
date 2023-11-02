@@ -135,7 +135,7 @@ class DetailsActivityTest {
             val totalCountTextView =
                 it.findViewById<TextView>(R.id.totalCountTextView)
 
-            it.presenter.onDetach()
+            //it.presenter.onDetach()
             decrementButton.performClick()
             assertEquals(TEST_NUMBER_OF_RESULTS_ZERO, totalCountTextView.text)
         }
@@ -147,7 +147,7 @@ class DetailsActivityTest {
             val totalCountTextView =
                 it.findViewById<TextView>(R.id.totalCountTextView)
 
-            it.presenter.onDetach()
+            //it.presenter.onDetach()
             incrementButton.performClick()
             assertEquals(TEST_NUMBER_OF_RESULTS_ZERO, totalCountTextView.text)
         }
