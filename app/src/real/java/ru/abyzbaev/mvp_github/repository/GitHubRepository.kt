@@ -39,6 +39,10 @@ internal class GitHubRepository(private val gitHubApi: GitHubApi): RepositoryCon
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    override suspend fun searchGithubAsync(query: String): SearchResponse {
+        return gitHubApi.searchGithubAsync(query).await()
+    }
+
     interface GitHubRepositoryCallback {
         fun handleGitHubResponse(response: Response<SearchResponse?>?)
         fun handleGitHubError()
