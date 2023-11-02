@@ -1,5 +1,8 @@
 package ru.abyzbaev.mvp_github.repository
 
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,6 +14,10 @@ import kotlin.random.Random
 internal class GitHubRepository(private val gitHubApi: GitHubApi) : RepositoryContract {
     override fun searchGithub(query: String, callback: RepositoryCallback) {
         callback.handleGithubResponse(Response.success(getFakeResponse()))
+    }
+
+    override fun searchGithub(query: String): Observable<SearchResponse> {
+        return Observable.just(getFakeResponse())
     }
 
     private fun getFakeResponse(): SearchResponse {
